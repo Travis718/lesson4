@@ -13,10 +13,11 @@ public class Main
     static final char DOT_X = 'X';
     static final char DOT_0 = '0';
 
-    public static void main(String[] args)
-    {
+    public static void main(String[] args) {
         initMap();
         printMap();
+
+
 
     }
     static void initMap()
@@ -96,6 +97,20 @@ public class Main
         {
             return false;
         }
+    }
+    static boolean isMapFull()
+    {
+        for (int i = 0; i < map.length; i++)
+        {
+            for (int j = 0; j < map[i].length; j++)
+            {
+                if (map[i][j] == DOT_EMPTY)
+                {
+                    return false;
+                }
+            }
+        }
+        return true;
     }
 
 }
