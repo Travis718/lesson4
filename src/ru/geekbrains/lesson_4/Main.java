@@ -1,5 +1,6 @@
 package ru.geekbrains.lesson_4;
 
+import java.util.Arrays;
 import java.util.Random;
 import java.util.Scanner;
 
@@ -18,6 +19,28 @@ public class Main
         printMap();
 
 
+        while (true)
+        {
+            makeHumanTurn();
+            printMap();
+            if (hasWin(DOT_X))
+            {
+                System.out.println("Победил человек");
+                break;
+            }
+                if (isMapFull())
+                {
+                    System.out.println("Ничья");
+                    break;
+                }
+                makeAiTurn();
+                if (hasWin(DOT_0))
+                {
+                    System.out.println("Человек лузер");
+
+            }
+
+        }
 
     }
     static void initMap()
@@ -98,6 +121,9 @@ public class Main
             return false;
         }
     }
+
+
+
     static boolean isMapFull()
     {
         for (int i = 0; i < map.length; i++)
@@ -111,6 +137,47 @@ public class Main
             }
         }
         return true;
+    }
+    static boolean hasWin(char symb)
+    {
+        int line;
+        int column;
+        int diagR = 0;
+        int diagL = 0;
+
+        for (int i = 0; i <= SIZE - 1; i++) {
+            line = 0;
+            column = 0;
+            for (int j = 0; j <= SIZE - 1; j++) {
+                if (map[i][j] == symb) {
+                    line++;
+                    if (line == SIZE)
+                        return true;
+                }
+                if (map[j][i] == symb)
+                {
+                    column++;
+                    if (column == SIZE)
+                        return true;
+                }
+            }
+            if (map[i][i] == symb)
+            {
+                diagR++;
+                if (diagR ==SIZE)
+                    return true;
+            }
+            else diagR = 0;
+
+            if (map[i][SIZE - 1 - i] == symb)
+            {
+                diagL++;
+                if (diagL == SIZE)
+                    return true;
+            }
+            else diagL = 0;
+        }
+        return false;
     }
 
 }
